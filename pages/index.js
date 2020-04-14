@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import ReactFullpage from "@fullpage/react-fullpage";
 
 class Inspo extends React.Component {
@@ -34,31 +35,53 @@ class Inspo extends React.Component {
     render() {
         const { fullpages } = this.state;
 
-        if(!fullpages.length) {
+        if (!fullpages.length) {
             return null;
         }
 
         return (
             <div className="Inspo">
-                
+
                 <ReactFullpage
                     navigation={true}
                     onLeave={this.onLeave.bind(this)}
                     licenseKey={'AA292B57-818B4C7D-BD530DCC-2171D815'}
                     render={comp => (
                         <ReactFullpage.Wrapper>
-                            <div key={fullpages[0].key} className="section" style={{ backgroundColor: "black" }}>
-                                <h1 style={{color: "white"}}>{fullpages[0].text}</h1>
+                            <div key={fullpages[0].key} className="section" id="intro">
+                                <h1>{fullpages[0].text}</h1>
                             </div>
-                            {fullpages.slice(1, fullpages.length).map(({ key,image,desc }) => (
-                                <div key={key} className="section" style={{ backgroundColor: "black"}}>
-                                    <img src={image} alt={desc} style={{ height: "100%"}}/>
+                            {fullpages.slice(1, fullpages.length).map(({ key, image, desc }) => (
+                                <div key={key} className="section">
+                                    <img src={image} alt={desc}/>
                                 </div>
                             ))}
+                            <style jsx>{`
+                            @font-face {
+                                font-family: 'CormorantGaramond'; 
+                                    src: url('/fonts/CormorantGaramond-Medium.ttf');
+                            }
+                                h1 {
+                                    font-family: 'CormorantGaramond';
+                                    color: white
+                                }
+
+                                #intro {
+                                    text-align: center
+                                }
+
+                                .section {
+                                    background-color: black
+                                }
+
+                                img {
+                                    height: 100%
+                                }
+                            `} </style>
                         </ReactFullpage.Wrapper>
                     )
                     }
-                />  
+                />
             </div>
         )
     }
